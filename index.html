@@ -6,16 +6,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>[headline to do in html and css]</h1>
-    <button onclick="playTheme()">Run background music</button>
-    <button onclick="stopTheme()">Stop playing background music</button>
+    <h1>Roxanne</h1>
+    <h2>...actually Ross Can!</h2>
+    <h3>Let's try and create your own Wordless Sound Poems</h3>
+    <button class="btn" onclick="playTheme()">Run background music</button>
+    <button class="btn" onclick="stopTheme()">Stop playing background music</button>
 
-    <!-- ogarnąć ww. buttony + h1 i ogólne ułożenie -->
+    <!-- ogarnąć strukturę (h, buttony, skrajne przyciski keyboarda), css'y edytować, zdjęcie dodać, na mobile zrobić -->
   
     <div class="keys">
     <div data-key="32" class="key">
-        <kbd>[ ]</kbd>
-        <span class="sound">tick-tock</span>
+      <kbd>[ ]</kbd>
+      <span class="sound">tick-tock</span>
     </div>
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -54,8 +56,8 @@
       <span class="sound">rooster</span>
     </div>
     <div data-key="13" class="key">
-        <kbd>↵</kbd>
-        <span class="sound">THE END</span>
+      <kbd>↵</kbd>
+      <span class="sound">THE END</span>
     </div>
   </div>
 
@@ -73,6 +75,8 @@
   <audio id="theme" src="audio/theme.wav"></audio>
 
 <script>
+  const theme = document.getElementById("theme");
+
   function removeTransition(e) {
     if (e.propertyName !== 'transform') return;
     e.target.classList.remove('playing');
@@ -86,17 +90,15 @@
     audio.play();
   }
 
-    function playTheme() {
-        const theme = document.getElementById("theme");
+  function playTheme() {
+    theme.play();
+    theme.loop = true;
+  }
 
-        theme.play();
-        theme.loop = true;
-    }
-
-    function stopTheme() {
-        console.log("działa");
-        // napisac funkcję
-    }
+  function stopTheme() {
+    theme.pause();
+    theme.currentTime = 0;
+  }
 
   const keys = Array.from(document.querySelectorAll('.key'));
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
