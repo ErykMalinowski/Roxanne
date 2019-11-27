@@ -12,11 +12,9 @@
     <h1>Roxanne</h1>
     <h2>...actually Ross Can!</h2>
     <h3>Let's try and create your own Wordless Sound Poems</h3>
-  </div>
-
-  <div class="buttons">
-    <button class="btn play" onclick="playTheme()">Run background music</button>
-    <button class="btn stop" onclick="stopTheme()">Stop playing background music</button>
+  
+    <button class="btn play">Run background music</button>
+    <button class="btn stop">Stop background music</button>
   </div>
 
   <div class="keys">
@@ -81,6 +79,8 @@
 
   <script>
     const theme = document.getElementById("theme");
+    const btnPlay = document.querySelector("button.btn.play");
+    const btnStop = document.querySelector("button.btn.stop");
 
     function removeTransition(e) {
       if (e.propertyName !== 'transform') return;
@@ -99,12 +99,12 @@
       if (key.getAttribute('data-key') === "109") stopTheme();
     }
 
-    function playTheme() {
+    let play = function playTheme() {
       theme.play();
       theme.loop = true;
     }
 
-    function stopTheme() {
+    let stop = function stopTheme() {
       theme.pause();
       theme.currentTime = 0;
     }
@@ -112,6 +112,9 @@
     const keys = Array.from(document.querySelectorAll('.key'));
     keys.forEach(key => key.addEventListener('transitionend', removeTransition));
     window.addEventListener('keydown', playSound);
+
+    btnPlay.addEventListener("click", play);
+    btnStop.addEventListener("click", stop);
   </script>
 
 
