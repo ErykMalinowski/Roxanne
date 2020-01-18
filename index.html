@@ -6,63 +6,70 @@
   <title>Roxanne</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-  <div class="info">
-    <h1>Roxanne</h1>
-    <h2>...actually Ross Can!</h2>
-    <h3>Let's try and create your own Wordless Sound Poems</h3>
+  <div class="wrapper">
+    <section class="info">
+      <div class="desc">
+        <h1>Roxanne</h1>
+        <h2>...actually Ross Can!</h2>
+        <h3>Let's try and create your own Wordless Sound Poems</h3>
+      </div>
 
-    <button class="btn play">Run background music</button>
-    <button class="btn stop">Stop background music</button>
-  </div>
+      <div class="btn">
+        <button class="btn-play">Run background music</button>
+        <button class="btn-stop">Stop background music</button>
+      </div>
+    </section>
 
-  <div class="keys">
-    <div data-key="107" class="key">
-      <kbd>+</kbd>
-      <span class="sound">tick-tock</span>
-    </div>
-    <div data-key="65" class="key">
-      <kbd>A</kbd>
-      <span class="sound">bark</span>
-    </div>
-    <div data-key="83" class="key">
-      <kbd>S</kbd>
-      <span class="sound">cow</span>
-    </div>
-    <div data-key="68" class="key">
-      <kbd>D</kbd>
-      <span class="sound">door</span>
-    </div>
-    <div data-key="70" class="key">
-      <kbd>F</kbd>
-      <span class="sound">drill</span>
-    </div>
-    <div data-key="71" class="key">
-      <kbd>G</kbd>
-      <span class="sound">electricity</span>
-    </div>
-    <div data-key="72" class="key">
-      <kbd>H</kbd>
-      <span class="sound">glass</span>
-    </div>
-    <div data-key="74" class="key">
-      <kbd>J</kbd>
-      <span class="sound">laser</span>
-    </div>
-    <div data-key="75" class="key">
-      <kbd>K</kbd>
-      <span class="sound">police</span>
-    </div>
-    <div data-key="76" class="key">
-      <kbd>L</kbd>
-      <span class="sound">rooster</span>
-    </div>
-    <div data-key="109" class="key">
-      <kbd>-</kbd>
-      <span class="sound">THE END</span>
-    </div>
+    <section class="keys">
+      <div data-key="107" class="key">
+        <kbd>+</kbd>
+        <span class="sound">tick-tock</span>
+      </div>
+      <div data-key="65" class="key">
+        <kbd>A</kbd>
+        <span class="sound">bark</span>
+      </div>
+      <div data-key="83" class="key">
+        <kbd>S</kbd>
+        <span class="sound">cow</span>
+      </div>
+      <div data-key="68" class="key">
+        <kbd>D</kbd>
+        <span class="sound">door</span>
+      </div>
+      <div data-key="70" class="key">
+        <kbd>F</kbd>
+        <span class="sound">drill</span>
+      </div>
+      <div data-key="71" class="key">
+        <kbd>G</kbd>
+        <span class="sound">electricity</span>
+      </div>
+      <div data-key="72" class="key">
+        <kbd>H</kbd>
+        <span class="sound">glass</span>
+      </div>
+      <div data-key="74" class="key">
+        <kbd>J</kbd>
+        <span class="sound">laser</span>
+      </div>
+      <div data-key="75" class="key">
+        <kbd>K</kbd>
+        <span class="sound">police</span>
+      </div>
+      <div data-key="76" class="key">
+        <kbd>L</kbd>
+        <span class="sound">rooster</span>
+      </div>
+      <div data-key="109" class="key">
+        <kbd>-</kbd>
+        <span class="sound">THE END</span>
+      </div>
+    </section>
   </div>
 
   <audio data-key="107" src="audio/tick-tock.wav"></audio>
@@ -77,47 +84,6 @@
   <audio data-key="76" src="audio/rooster.mp3"></audio>
   <audio data-key="109" src="audio/explosion.wav"></audio>
   <audio id="theme" src="audio/theme.wav"></audio>
-
-  <script>
-    const theme = document.getElementById("theme");
-    const btnPlay = document.querySelector("button.btn.play");
-    const btnStop = document.querySelector("button.btn.stop");
-
-    function removeTransition(e) {
-      if (e.propertyName !== 'transform') return;
-      e.target.classList.remove('playing');
-    }
-
-    function playSound(e) {
-      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-      const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-
-      if (!audio) return;
-      key.classList.add('playing');
-      audio.currentTime = 0;
-      audio.play();
-
-      if (key.getAttribute('data-key') === "109") stopTheme();
-    }
-
-    let play = function playTheme() {
-      theme.play();
-      theme.loop = true;
-    }
-
-    let stop = function stopTheme() {
-      theme.pause();
-      theme.currentTime = 0;
-    }
-
-    const keys = Array.from(document.querySelectorAll('.key'));
-    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-    window.addEventListener('keydown', playSound);
-
-    btnPlay.addEventListener("click", play);
-    btnStop.addEventListener("click", stop);
-  </script>
-
 
 </body>
 
