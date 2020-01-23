@@ -16,7 +16,7 @@ function playSound(e) {
     audio.currentTime = 0;
     audio.play();
 
-    if (key.getAttribute('data-key') === "109") stopTheme();
+    if (key.getAttribute('data-key') === "109") stop();
 }
 
 const play = () => {
